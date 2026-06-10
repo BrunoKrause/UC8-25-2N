@@ -1,5 +1,8 @@
 
+import java.beans.PropertyVetoException;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +45,12 @@ public class telaPrincipal extends javax.swing.JFrame {
         menuSobre = new javax.swing.JMenu();
         menuAjuda = new javax.swing.JMenu();
         menuJanela = new javax.swing.JMenu();
+        itemMinimizarTodas = new javax.swing.JMenuItem();
+        itemRestaurar = new javax.swing.JMenuItem();
+        itemLadoALado = new javax.swing.JMenuItem();
+        itemCascata = new javax.swing.JMenuItem();
+        itemGrade = new javax.swing.JMenuItem();
+        itemFecharJanelas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,12 +165,27 @@ public class telaPrincipal extends javax.swing.JFrame {
         menuConsulta.setText("Consulta");
 
         itemConsultaCliente.setText("Cliente");
+        itemConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemConsultaClienteActionPerformed(evt);
+            }
+        });
         menuConsulta.add(itemConsultaCliente);
 
         itemConsultaProduto.setText("Produto");
+        itemConsultaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemConsultaProdutoActionPerformed(evt);
+            }
+        });
         menuConsulta.add(itemConsultaProduto);
 
         itemConsultaServiço.setText("Serviço");
+        itemConsultaServiço.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemConsultaServiçoActionPerformed(evt);
+            }
+        });
         menuConsulta.add(itemConsultaServiço);
 
         jMenuBar1.add(menuConsulta);
@@ -169,12 +193,27 @@ public class telaPrincipal extends javax.swing.JFrame {
         menuRelatório.setText("Relatório");
 
         itemRelatorioCliente.setText("Clientes");
+        itemRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRelatorioClienteActionPerformed(evt);
+            }
+        });
         menuRelatório.add(itemRelatorioCliente);
 
         itemRelatorioProduto.setText("Produtos");
+        itemRelatorioProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRelatorioProdutoActionPerformed(evt);
+            }
+        });
         menuRelatório.add(itemRelatorioProduto);
 
         itemRelatorioServiço.setText("Ordem de Serviço");
+        itemRelatorioServiço.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRelatorioServiçoActionPerformed(evt);
+            }
+        });
         menuRelatório.add(itemRelatorioServiço);
 
         jMenuBar1.add(menuRelatório);
@@ -189,6 +228,55 @@ public class telaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(menuAjuda);
 
         menuJanela.setText("Janela");
+
+        itemMinimizarTodas.setText("Minimizar Todas");
+        itemMinimizarTodas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMinimizarTodasActionPerformed(evt);
+            }
+        });
+        menuJanela.add(itemMinimizarTodas);
+
+        itemRestaurar.setText("Restaurar Janelas");
+        itemRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRestaurarActionPerformed(evt);
+            }
+        });
+        menuJanela.add(itemRestaurar);
+
+        itemLadoALado.setText("Organizar Lado a Lado");
+        itemLadoALado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemLadoALadoActionPerformed(evt);
+            }
+        });
+        menuJanela.add(itemLadoALado);
+
+        itemCascata.setText("Organizar em Cascata");
+        itemCascata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCascataActionPerformed(evt);
+            }
+        });
+        menuJanela.add(itemCascata);
+
+        itemGrade.setText("Organizar em Grade");
+        itemGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemGradeActionPerformed(evt);
+            }
+        });
+        menuJanela.add(itemGrade);
+
+        itemFecharJanelas.setText("Fechar Todas");
+        itemFecharJanelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemFecharJanelasActionPerformed(evt);
+            }
+        });
+        menuJanela.add(itemFecharJanelas);
+
         jMenuBar1.add(menuJanela);
 
         setJMenuBar(jMenuBar1);
@@ -259,6 +347,181 @@ public class telaPrincipal extends javax.swing.JFrame {
         tela.setLocation(50,50);
     }//GEN-LAST:event_btnCadServiçoActionPerformed
 
+    private void itemMinimizarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMinimizarTodasActionPerformed
+        for (JInternalFrame frame: desktopPrincipal.getAllFrames()){
+            
+            try {
+                frame.setIcon(true);
+            } catch (PropertyVetoException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_itemMinimizarTodasActionPerformed
+
+    private void itemCascataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCascataActionPerformed
+        JInternalFrame[] frames = desktopPrincipal.getAllFrames();
+        
+        int deslocamento = 30;
+        
+        for (int i = 0; i < frames.length; i++) {
+            
+            try {
+                frames[i].setIcon(false);
+                frames[i].setMaximum(false);
+            } catch (Exception e) {
+            }
+            
+            frames[i].setBounds(
+                    i * deslocamento,
+                    i * deslocamento,
+                    600,
+                    400
+            );
+        }
+    }//GEN-LAST:event_itemCascataActionPerformed
+
+    private void itemRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRestaurarActionPerformed
+        for (JInternalFrame frame: desktopPrincipal.getAllFrames()) {
+            
+            try {
+                frame.setIcon(false);
+            } catch (PropertyVetoException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_itemRestaurarActionPerformed
+
+    private void itemLadoALadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLadoALadoActionPerformed
+        
+        JInternalFrame[] frames = desktopPrincipal.getAllFrames();
+        
+        if (frames.length == 0) {
+            return;
+        }
+        
+        int larguraDesktop = desktopPrincipal.getWidth();
+        int alturaDesktop = desktopPrincipal.getHeight();
+        
+        int larguraFrame = larguraDesktop / frames.length;
+        
+        for (int i = 0; i < frames.length; i++) {
+            
+            try {
+                frames[i].setIcon(false);
+                frames[i].setMaximum(false);
+            } catch (Exception e) {
+            }
+        
+            frames[i].setBounds(
+                    i * larguraFrame,
+                    0,
+                    larguraFrame,
+                    alturaDesktop
+            );
+        }
+    }//GEN-LAST:event_itemLadoALadoActionPerformed
+
+    private void itemGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGradeActionPerformed
+        JInternalFrame[] frames = desktopPrincipal.getAllFrames();
+        
+        if (frames.length == 0){
+            return;
+        }
+        
+        int cols = (int) Math.ceil(Math.sqrt(frames.length));
+        int rows = (int) Math.ceil((double) frames.length / cols);
+        
+        int largura = desktopPrincipal.getWidth() / cols;
+        int altura = desktopPrincipal.getHeight() / rows;
+        
+        int x = 0;
+        int y = 0;
+        int contador = 0;
+        
+        for (JInternalFrame frame : frames) {
+            
+            try {
+                frame.setIcon(false);
+                frame.setMaximum(false);
+            } catch (Exception e) {
+            }
+            
+            frame.setBounds(x, y, largura, altura);
+            
+            contador ++;
+            x += largura;
+            
+            if (contador % cols == 0) {
+                x = 0;
+                y += altura;
+            }
+        }
+    }//GEN-LAST:event_itemGradeActionPerformed
+
+    private void itemFecharJanelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemFecharJanelasActionPerformed
+        
+        int opcao = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja realmente fechar todas as janelas abertas?",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION
+        );
+        
+        if (opcao == JOptionPane.YES_OPTION) {
+            
+            for (JInternalFrame frame : desktopPrincipal.getAllFrames()) {
+                
+                try {
+                    frame.setClosed(true);
+                } catch (PropertyVetoException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }//GEN-LAST:event_itemFecharJanelasActionPerformed
+
+    private void itemConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaClienteActionPerformed
+        telaConCliente tela = new telaConCliente();
+        desktopPrincipal.add(tela);
+        tela.setVisible(true);
+        tela.setLocation(50,50);
+    }//GEN-LAST:event_itemConsultaClienteActionPerformed
+
+    private void itemConsultaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaProdutoActionPerformed
+        telaConProduto tela = new telaConProduto();
+        desktopPrincipal.add(tela);
+        tela.setVisible(true);
+        tela.setLocation(50,50);
+    }//GEN-LAST:event_itemConsultaProdutoActionPerformed
+
+    private void itemConsultaServiçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultaServiçoActionPerformed
+        telaConServico tela = new telaConServico();
+        desktopPrincipal.add(tela);
+        tela.setVisible(true);
+        tela.setLocation(50,50);
+    }//GEN-LAST:event_itemConsultaServiçoActionPerformed
+
+    private void itemRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRelatorioClienteActionPerformed
+        telaRelaCliente tela = new telaRelaCliente();
+        desktopPrincipal.add(tela);
+        tela.setVisible(true);
+        tela.setLocation(50,50);
+    }//GEN-LAST:event_itemRelatorioClienteActionPerformed
+
+    private void itemRelatorioProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRelatorioProdutoActionPerformed
+        telaRelaProduto tela = new telaRelaProduto();
+        desktopPrincipal.add(tela);
+        tela.setVisible(true);
+        tela.setLocation(50, 50);
+    }//GEN-LAST:event_itemRelatorioProdutoActionPerformed
+
+    private void itemRelatorioServiçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRelatorioServiçoActionPerformed
+        telaRelaServico tela = new telaRelaServico();
+        desktopPrincipal.add(tela);
+        tela.setVisible(true);
+        tela.setLocation(50, 50);
+    }//GEN-LAST:event_itemRelatorioServiçoActionPerformed
+
     public static void main(String args[]) {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -277,12 +540,18 @@ public class telaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCadastroCliente;
     private javax.swing.JMenuItem itemCadastroProduto;
     private javax.swing.JMenuItem itemCadastroServiço;
+    private javax.swing.JMenuItem itemCascata;
     private javax.swing.JMenuItem itemConsultaCliente;
     private javax.swing.JMenuItem itemConsultaProduto;
     private javax.swing.JMenuItem itemConsultaServiço;
+    private javax.swing.JMenuItem itemFecharJanelas;
+    private javax.swing.JMenuItem itemGrade;
+    private javax.swing.JMenuItem itemLadoALado;
+    private javax.swing.JMenuItem itemMinimizarTodas;
     private javax.swing.JMenuItem itemRelatorioCliente;
     private javax.swing.JMenuItem itemRelatorioProduto;
     private javax.swing.JMenuItem itemRelatorioServiço;
+    private javax.swing.JMenuItem itemRestaurar;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
