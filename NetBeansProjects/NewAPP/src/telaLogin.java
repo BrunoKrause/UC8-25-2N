@@ -3,6 +3,7 @@
  * @author BRUNOKRAUSENOIADACOS
  */
 
+import bancos.bancoUsuario;
 import javax.swing.JOptionPane;
 
 public class telaLogin extends javax.swing.JFrame {

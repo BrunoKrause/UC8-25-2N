@@ -3,6 +3,8 @@
  * @author BRUNOKRAUSENOIADACOS
  */
 
+import Classe.Usuario;
+import bancos.bancoUsuario;
 import javax.swing.JOptionPane;
 
 public class telaCadastro extends javax.swing.JFrame {

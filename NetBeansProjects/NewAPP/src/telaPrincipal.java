@@ -1,4 +1,13 @@
 
+import InternalFrame.telaRelaServico;
+import InternalFrame.telaRelaProduto;
+import InternalFrame.telaRelaCliente;
+import InternalFrame.telaConServico;
+import InternalFrame.telaConProduto;
+import InternalFrame.telaConCliente;
+import InternalFrame.telaCadServiço;
+import InternalFrame.telaCadProduto;
+import InternalFrame.telaCadCliente;
 import java.beans.PropertyVetoException;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
