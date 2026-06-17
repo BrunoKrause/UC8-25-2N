@@ -1,9 +1,23 @@
 package InternalFrame;
 import bancos.bancoProdutos;
 import Classe.Produto;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class telaConProduto extends javax.swing.JInternalFrame {
+    
+    private int idSelecionado = 0;
+    
+    private void limparCampos() {
+        txtDescricao.setText("");
+        txtValor.setText("");
+        txtQuantidade.setText("");
+        campoPesquisa.setText("");
+        
+        idSelecionado = 0;
+        
+        campoPesquisa.requestFocus();
+    }
     
     private void carregarProdutos() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -64,6 +78,12 @@ public class telaConProduto extends javax.swing.JInternalFrame {
         tabelaProdutos = new javax.swing.JTable();
         rbDescricao = new javax.swing.JRadioButton();
         rbId = new javax.swing.JRadioButton();
+        txtDescricao = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
+        btnAdicionar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -71,6 +91,8 @@ public class telaConProduto extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Consulta de Produto");
 
+        campoPesquisa.setBackground(new java.awt.Color(242, 242, 242));
+        campoPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pesquisar por:", javax.swing.border.TitledBorder.LEADING, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         campoPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoPesquisaActionPerformed(evt);
@@ -95,6 +117,11 @@ public class telaConProduto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelaProdutos);
 
         buttonGroup1.add(rbDescricao);
@@ -104,23 +131,62 @@ public class telaConProduto extends javax.swing.JInternalFrame {
         buttonGroup1.add(rbId);
         rbId.setText("Código");
 
+        txtDescricao.setBackground(new java.awt.Color(242, 242, 242));
+        txtDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Descrição"));
+
+        txtValor.setBackground(new java.awt.Color(242, 242, 242));
+        txtValor.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Valor"));
+
+        txtQuantidade.setBackground(new java.awt.Color(242, 242, 242));
+        txtQuantidade.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Quantidade"));
+
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(campoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(rbDescricao)
                         .addGap(18, 18, 18)
-                        .addComponent(rbId)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                        .addComponent(rbId))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(txtValor, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(campoPesquisa))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPesquisar)
+                            .addComponent(btnEditar)
+                            .addComponent(btnAdicionar)
+                            .addComponent(btnExcluir))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,12 +195,25 @@ public class telaConProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbDescricao)
                     .addComponent(rbId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -148,8 +227,109 @@ public class telaConProduto extends javax.swing.JInternalFrame {
         carregarProdutos();
     }//GEN-LAST:event_campoPesquisaActionPerformed
 
+    private void tabelaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutosMouseClicked
+        int linha = tabelaProdutos.getSelectedRow();
+        
+        if (linha >= 0) {
+            idSelecionado = Integer.parseInt(tabelaProdutos.getValueAt(linha, 0).toString());
+            
+            txtDescricao.setText(tabelaProdutos.getValueAt(linha, 1).toString());
+            
+            txtValor.setText(tabelaProdutos.getValueAt(linha, 2).toString());
+            
+            txtQuantidade.setText(tabelaProdutos.getValueAt(linha, 3).toString());
+        }
+    }//GEN-LAST:event_tabelaProdutosMouseClicked
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        if (txtDescricao.getText().isEmpty()
+                || txtValor.getText().isEmpty()
+                || txtQuantidade.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
+            
+            return;
+        }
+        
+        Produto produto = new Produto();
+        
+        produto.setId(bancoProdutos.idProduto);
+        produto.setDescricao(txtDescricao.getText());
+        produto.setValor(Double.parseDouble(txtValor.getText()));
+        produto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        
+        bancoProdutos.produtos.add(produto);
+        
+        bancoProdutos.idProduto++;
+        
+        JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+        
+        carregarProdutos();
+        limparCampos();
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+        if (idSelecionado == 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um produto.");
+            
+            return;
+        }
+        
+        for (Produto produto : bancoProdutos.produtos) {
+            
+            if (produto.getId() == idSelecionado) {
+                produto.setDescricao(txtDescricao.getText());
+                produto.setValor(Double.parseDouble(txtValor.getText()));
+                produto.setQuantidade(Integer.parseInt(txtValor.getText()));
+                
+                JOptionPane.showMessageDialog(null, "Produto atualizado!");
+                
+                carregarProdutos();
+                limparCampos();
+                
+                idSelecionado = 0;
+                
+                break;
+            }
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        
+        if (idSelecionado == 0) {
+            
+            JOptionPane.showMessageDialog(null, "Selecione um produto.");
+            
+            return;
+        }
+        
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja Excluir?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        
+        if (resposta == JOptionPane.YES_OPTION) {
+            
+            for (Produto produto : bancoProdutos.produtos) {
+                
+                if (produto.getId() == idSelecionado) {
+                    bancoProdutos.produtos.remove(produto);
+                    
+                    JOptionPane.showMessageDialog(null, "Produto removido!");
+                   
+                    carregarProdutos();
+                    limparCampos();
+                    
+                    idSelecionado = 0;
+                    
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField campoPesquisa;
@@ -157,5 +337,8 @@ public class telaConProduto extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbDescricao;
     private javax.swing.JRadioButton rbId;
     private javax.swing.JTable tabelaProdutos;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }
