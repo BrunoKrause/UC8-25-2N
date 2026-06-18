@@ -65,6 +65,7 @@ public class telaConProduto extends javax.swing.JInternalFrame {
     public telaConProduto() {
         initComponents();
         carregarProdutos();
+        setSize(600, 500);
     }
 
     @SuppressWarnings("unchecked")
