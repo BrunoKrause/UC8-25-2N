@@ -86,6 +86,7 @@ public class telaConCliente extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Consulta de Cliente");
 
+        campoPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar por:"));
         campoPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoPesquisaActionPerformed(evt);
@@ -129,11 +130,16 @@ public class telaConCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        txtNome.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
             }
         });
+
+        txtCpf.setBorder(javax.swing.BorderFactory.createTitledBorder("CPF"));
+
+        txtEmail.setBorder(javax.swing.BorderFactory.createTitledBorder("Email"));
 
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +212,7 @@ public class telaConCliente extends javax.swing.JInternalFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

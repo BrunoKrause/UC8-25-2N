@@ -51,7 +51,6 @@ public class telaLogin extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\BRUNOKRAUSENOIADACOS\\Downloads\\aplicativo-web (2).png")); // NOI18N
 
         campoEmail.setBackground(new java.awt.Color(102, 102, 102));
         campoEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Email"));
